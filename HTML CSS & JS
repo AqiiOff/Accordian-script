@@ -1,0 +1,38 @@
+You can achieve the effect of hiding one text by default and making another text visible when clicking on a heading text using HTML, CSS, and JavaScript. Here's a step-by-step guide to implement this:
+
+Create the HTML structure:
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <h2 class="heading">Click me to toggle text</h2>
+    <div class="hidden-text" style="display: none;">This is the hidden text that will be visible when you click the heading.</div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+Add JavaScript to toggle the visibility (script.js):
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get references to the heading and hidden text elements
+    var heading = document.querySelector('.heading');
+    var hiddenText = document.querySelector('.hidden-text');
+
+    // Add a click event listener to the heading
+    heading.addEventListener('click', function () {
+        // Toggle the visibility of the hidden text
+        if (hiddenText.style.display === 'none' || hiddenText.style.display === '') {
+            hiddenText.style.display = 'block';
+        } else {
+            hiddenText.style.display = 'none';
+        }
+    });
+});
+
+In this code, we start by defining the HTML structure with a heading and a hidden text element. The hidden text is initially hidden using the style="display: none;" attribute. 
+The JavaScript code adds a click event listener to the heading element. When the heading is clicked, it checks the current display style of the hidden text and toggles it between 
+"block" (visible) and "none" (hidden).
+
+This creates a simple toggle effect where clicking the heading will show or hide the hidden text. You can add your desired styles and modify the content as needed to fit your design.
