@@ -1,0 +1,39 @@
+If you want to implement the show/hide functionality on multiple fields within an Advanced Custom Fields (ACF) repeater, you'll need to adapt the code to handle the repeater structure. 
+A repeater field in ACF generates a set of subfields within a group. You can modify the previous example to work within an ACF repeater structure. Here's how you can do it:
+
+Set up your ACF repeater field and its subfields in the WordPress admin.
+
+Modify the HTML structure in your WordPress template file (e.g., single.php or page.php) to reflect the ACF repeater field structure. Here's an example:
+<?php if (have_rows('repeater_field_name')) : ?>
+    <?php while (have_rows('repeater_field_name')) : the_row(); ?>
+        <h2 class="heading">Click me to toggle text</h2>
+        <div class="hidden-text" style="display: none;"><?php the_sub_field('subfield_name'); ?></div>
+    <?php endwhile; ?>
+<?php endif; ?>
+
+Create a JavaScript file (e.g., script.js) and enqueue it in your theme. Here's a modified JavaScript code to work with ACF repeaters:
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all the heading and hidden text elements within the ACF repeater
+    var headings = document.querySelectorAll('.heading');
+    var hiddenTexts = document.querySelectorAll('.hidden-text');
+
+    // Add a click event listener to each heading within the repeater
+    headings.forEach(function (heading, index) {
+        heading.addEventListener('click', function () {
+            // Toggle the visibility of the corresponding hidden text
+            if (hiddenTexts[index].style.display === 'none' || hiddenTexts[index].style.display === '') {
+                hiddenTexts[index].style.display = 'block';
+            } else {
+                hiddenTexts[index].style.display = 'none';
+            }
+        });
+    });
+});
+
+
+With this code, we use a loop to add click event listeners to each heading element and its corresponding hidden text within the ACF repeater. Clicking on a heading will toggle the visibility 
+of the associated hidden text.
+
+Make sure to replace 'repeater_field_name' and 'subfield_name' with the actual names you've set for your ACF fields in the WordPress admin. Additionally, ensure that you've properly enqueued your 
+JavaScript file in your WordPress theme for it to take effect.
